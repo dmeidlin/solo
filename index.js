@@ -27,9 +27,9 @@ io.on('connection', function(socket){
 
 /* listen to the port set by the service provider;
  otherwise 3000 by default: */
-var port = process.env.PORT || 3000
-
+var port = process.env.PORT || 3000;
+var ip = process.env.IP || '127.0.0.1';
 //http.listen(...
-server.listen(port, function(){
+server.listen(port, ip, function () {
   console.log('listening on *:' + port);
 });
