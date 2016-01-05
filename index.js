@@ -1,7 +1,3 @@
-// var app = require('express')();
-// var http = require('http').Server(app);
-// var io = require('socket.io')(http);
-
 var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
@@ -17,19 +13,23 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
   console.log('A user is connected.');
+  io.emit('user in', 'A new user has entered.');
   socket.on('disconnect', function() {
     console.log('User disconnected.');
   });
-}); 
-
-io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
     io.emit('chat message', msg);
   });
-});
+}); 
 
-//http.listen(...
+// io.on('connection', function(socket){
+//   socket.on('chat message', function(msg){
+//     console.log('message: ' + msg);
+//     io.emit('chat message', msg);
+//   });
+// });
+
 server.listen(port, function () {
   console.log('listening on *:' + port);
 });
