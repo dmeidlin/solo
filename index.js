@@ -2,11 +2,12 @@
 // var http = require('http').Server(app);
 // var io = require('socket.io')(http);
 
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http');
 var server = http.createServer(app);
-var io = require('socket.io')(server);
-
+var ioSocket = require('socket.io');
+var io = ioSocket(server);
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
@@ -28,8 +29,8 @@ io.on('connection', function(socket){
 /* listen to the port set by the service provider;
  otherwise 3000 by default: */
 var port = process.env.PORT || 3000;
-var ip = process.env.IP || '127.0.0.1';
+
 //http.listen(...
-server.listen(port, ip, function () {
+server.listen(port, function () {
   console.log('listening on *:' + port);
 });
