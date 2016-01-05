@@ -8,7 +8,7 @@
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin: 0; padding: 0; overflow: scroll}
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #notify { color: rgb(20, 110, 108); background: rgb(173, 222, 221); position: fixed; bottom: 41px}
@@ -24,21 +24,23 @@
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
+    <span></span>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       /* no url is passed to the io() call since the default is
       the location of the server that sent this page */
       if ($('title').text() === 'ChatNOW') {
-        var chatName = prompt('Please enter a name for users to identify your messages.', 'Anonymous');
-        $('title').html('ChatNOW: ' + chatName);
+      var chatName = prompt('Please enter a name for users to identify your messages.', 'Anonymous') || 'Anonymous';
+      $('title').text('ChatNOW: ' + chatName);
+      $('h1').text('ChatNOW: ' + chatName);
       }
       var socket = io();
       socket.on('connect', function(){
         socket.emit('join', chatName);        
       });
       $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
+        socket.emit('chat message', chatName + ': ' + $('#m').val());
         $('#m').val('');
         return false;
       });
@@ -46,7 +48,7 @@
         socket.emit('typing', chatName);
       });
       socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
+        $('#messages').prepend($('<li>').text(msg));
 	$('#notify').text('');
       });
       socket.on('user in', function(announce){
