@@ -13,23 +13,27 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
   console.log('A user is connected.');
-  io.emit('user in', 'A new user has entered.');
+
+  socket.on('join', function (chatName) {
+    io.emit('user in', chatName + ' has entered.');
+  });
+  
   socket.on('disconnect', function() {
     console.log('User disconnected.');
+    io.emit('user out', 'A user has left');
   });
+
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
     io.emit('chat message', msg);
   });
+  socket.on('typing', function(){
+    io.emit('typing', 'Someone is typing.');
+  });
 }); 
-
-// io.on('connection', function(socket){
-//   socket.on('chat message', function(msg){
-//     console.log('message: ' + msg);
-//     io.emit('chat message', msg);
-//   });
-// });
 
 server.listen(port, function () {
   console.log('listening on *:' + port);
 });
+
+console.log(io.sockets);
