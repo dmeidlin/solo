@@ -3,17 +3,166 @@
   <head>
     <title>ChatNOW</title>
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; overflow: scroll}
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #notify { color: rgb(20, 110, 108); background: rgb(173, 222, 221); position: fixed; bottom: 41px}
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing:
+      border-box;
+      }
+
+      body {
+      font: 13px Helvetica, Arial;
+      font-family: 'Helvetica Neue',Helvetica,sans-serif;
+      }
+
+      h1 {
+      text-align: center;
+      color: #725129;
+      background: #e4d5c3;
+      font-family: Tahoma, Geneva, sans-serif;
+      text-shadow: 1px 1px 1px #ccc;
+      }
+      #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: scroll
+      }
+      
+      #messages li {
+      padding: 5px 10px;
+      }
+
+      #messages li:nth-child(odd) {
+      background: #eee;
+      }
+
+      form {
+        background: FFFFFF;
+      }
+
+      .form-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      border: 1px solid #f2e3d2;
+      background: #c9b7a2;
+      background: -webkit-gradient(linear, left top, left bottom, from(#f2e3d2), to(#c9b7a2));
+      background: -webkit-linear-gradient(top, #f2e3d2, #c9b7a2);
+      background: -moz-linear-gradient(top, #f2e3d2, #c9b7a2);
+      background: -ms-linear-gradient(top, #f2e3d2, #c9b7a2);
+      background: -o-linear-gradient(top, #f2e3d2, #c9b7a2);
+      background-image: -ms-linear-gradient(top, #f2e3d2 0%, #c9b7a2 100%);
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      border-radius: 8px;
+      -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+      -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+      box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+      font-family: 'Helvetica Neue',Helvetica,sans-serif;
+      text-decoration: none;
+      vertical-align: middle;
+      margin-right: .5%;   
+      padding:2px;
+      }
+      #m {
+      border: 1px solid #c9b7a2;
+      background: #e4d5c3;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      color: #c9b7a2;
+      -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+      -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+      box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+      padding:10px;
+      margin-right: .5%;
+      width:90%;
+      }
+      
+      #m:focus {
+      background: #fff;
+      color: #725129;
+      }
+      
+      #notify {
+      color: #725129;
+      background: #e4d5c3;
+      text-shadow: #fdf2e4 0 1px 0;
+      font-size:18px;
+      margin: 0 0 10px 0;
+      font-weight:bold;
+      text-align:center;
+      position: fixed;
+      bottom: 32px;
+      width:280px;
+      } 
+            
+ form h2 {
+   text-shadow: #fdf2e4 0 1px 0;
+   font-size:18px;
+   margin: 0 0 10px 0;
+   font-weight:bold;
+   text-align:center;
+    }
+.form-title {
+   margin-bottom:10px;
+   color: #725129;
+   text-shadow: #fdf2e4 0 1px 0;
+   }
+.submit-container {
+   margin:8px 0;
+   text-align:right;
+   }
+ .submit-button {
+   border: 1px solid #447314;
+   background: #6aa436;
+   background: -webkit-gradient(linear, left top, left bottom, from(#8dc059), to(#6aa436));
+   background: -webkit-linear-gradient(top, #8dc059, #6aa436);
+   background: -moz-linear-gradient(top, #8dc059, #6aa436);
+   background: -ms-linear-gradient(top, #8dc059, #6aa436);
+   background: -o-linear-gradient(top, #8dc059, #6aa436);
+   background-image: -ms-linear-gradient(top, #8dc059 0%, #6aa436 100%);
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #addc7e 0 1px 0;
+   color: #31540c;
+   font-family: helvetica, serif;
+   padding: 8.5px 26px;
+   font-size: 14px;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.submit-button:hover {
+   border: 1px solid #447314;
+   text-shadow: #31540c 0 1px 0;
+   background: #6aa436;
+   background: -webkit-gradient(linear, left top, left bottom, from(#8dc059), to(#6aa436));
+   background: -webkit-linear-gradient(top, #8dc059, #6aa436);
+   background: -moz-linear-gradient(top, #8dc059, #6aa436);
+   background: -ms-linear-gradient(top, #8dc059, #6aa436);
+   background: -o-linear-gradient(top, #8dc059, #6aa436);
+   background-image: -ms-linear-gradient(top, #8dc059 0%, #6aa436 100%);
+   color: #fff;
+   }
+.submit-button:active {
+   text-shadow: #31540c 0 1px 0;
+   border: 1px solid #447314;
+   background: #8dc059;
+   background: -webkit-gradient(linear, left top, left bottom, from(#6aa436), to(#6aa436));
+   background: -webkit-linear-gradient(top, #6aa436, #8dc059);
+   background: -moz-linear-gradient(top, #6aa436, #8dc059);
+   background: -ms-linear-gradient(top, #6aa436, #8dc059);
+   background: -o-linear-gradient(top, #6aa436, #8dc059);
+   background-image: -ms-linear-gradient(top, #6aa436 0%, #8dc059 100%);
+   color: #fff;
+   }
     </style>
-    <!-- <link rel="stylesheet" type="text/css" href="/style.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
   </head>
   <script src="/socket.io/socket.io.js"></script>
   <script>var socket = io();</script>
@@ -21,8 +170,8 @@
     <div id="notify"></div>
     <h1>ChatNOW</h1>
     <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+    <form class="form-container" action="">
+      <input id="m" autocomplete="off" /><button class="submit-button">Send</button>
     </form>
     <span></span>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>

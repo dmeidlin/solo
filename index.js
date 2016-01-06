@@ -20,7 +20,7 @@ io.on('connection', function (socket) {
   
   socket.on('disconnect', function() {
     console.log('User disconnected.');
-    io.emit('user out', 'A user has left');
+    io.emit('user out', 'A user has left.');
   });
 
   socket.on('chat message', function(msg){
